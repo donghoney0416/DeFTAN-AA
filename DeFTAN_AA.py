@@ -27,6 +27,7 @@ class Network(nn.Module):
 
         t_ksize = 3
         ks, padding = (t_ksize, 3), (t_ksize // 2, 1)
+        # Encoding
         self.in_conv = nn.Sequential(
             nn.Conv2d(2, emb_dim, ks, padding=padding),
             nn.GroupNorm(1, emb_dim, eps=eps),
@@ -35,12 +36,19 @@ class Network(nn.Module):
             nn.Conv2d(4, emb_dim, ks, padding=padding),
             nn.GroupNorm(1, emb_dim, eps=eps),
         )
+        # Spatial-Transformer (ST)
         self.att_enc = Att_Encoder()
+        self.LN = nn.LayerNorm(emb_dim)
+        # DeFTAN2 blocks
         self.blocks = nn.ModuleList([])
         for _ in range(n_layers):
             self.blocks.append(DeFTANBlock(emb_dim, emb_ks, emb_hs, hidden_dim, n_head=attn_n_head, eps=eps))
+        # Space-Object Cross-Attention (SOCA)
         self.cross_att = nn.MultiheadAttention(emb_dim, attn_n_head, dropout=0.1, batch_first=True)
-        self.LN = nn.LayerNorm(emb_dim)
+        self.LN1 = nn.LayerNorm(emb_dim)
+        self.ffw = FeedForward(emb_dim, emb_dim, dropout=0.1)
+        self.LN2 = nn.LayerNorm(emb_dim)
+        # Decoder
         self.deconv = nn.ConvTranspose2d(emb_dim, n_srcs * 2, ks, padding=padding)
 
     def pad_signal(self, input):
@@ -73,9 +81,9 @@ class Network(nn.Module):
         xi = stft_input.view([B, M, F, T, 2])  # B*M, T, T, 2 -> B, M, T, T, 2
         xi = xi.permute(0, 1, 4, 3, 2).contiguous()  # B, M, 2, T, F
         batch = xi.view([B, M * 2, T, F])  # B, 2*M, T, F
+        # ST
         batch = self.att_enc(batch)        # BM, 4, T, F
         object = self.in_conv(xi.view([B*M, 2, T, F]))      # BM, C, T, F
-
         batch = self.conv(batch)  # [BM, C, T, F]
         C = batch.shape[1]
         for ii in range(self.n_layers):
@@ -83,8 +91,11 @@ class Network(nn.Module):
             if ii == 0:
                 space = self.LN(batch.reshape(B, M, C, T, F).permute(0, 3, 4, 1, 2).reshape(B*T*F, M, C))
                 object = object.reshape(B, M, C, T, F).permute(0, 3, 4, 1, 2).reshape(B*T*F, M, C)
-                batch = self.cross_att(space, object, object)[0] + space
+                # SOCA
+                batch = self.LN1(self.cross_att(space, object, object)[0] + space)
+                batch = self.LN2(self.ffw(batch) + batch)
                 batch = batch.reshape(B, T, F, M, C).permute(0, 3, 4, 1, 2).contiguous()
+                # Mean-Pooling
                 batch = batch.mean(dim=1)
         batch = self.deconv(batch)  # [B, n_srcs*2, T, F]
 

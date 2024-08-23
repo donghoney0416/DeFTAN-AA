@@ -23,13 +23,15 @@ Experiments are performed for simulated datasets (spatialized DNS challenge) wit
 <details>
 <summary><strong>Simulated dataset</strong> (click to expand) </summary>
     
-<iㅡg src = ./figure/sim_results.PNG>
+<img src = ./figure/sim_results.PNG>
+
 </details>
 
 <details>
 <summary><strong>Real-world experiments</strong> (click to expand) </summary>
     
 <img src = ./figure/Real_exp.png>
+
 </details>
 
 

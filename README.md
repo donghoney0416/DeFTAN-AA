@@ -1,9 +1,8 @@
 # DeFTAN-AA: Array geometry agnostic multichannel speech enhancement (INTERSPEECH 2024)
-
-Official page of "DeFT-AA: Array geometry agnostic multichannel speech enhancement", in Proc. Interspeech, 2024"
-
 [![paper](https://img.shields.io/badge/Paper-Pdf-%3CCOLOR%3E.svg)](https://drive.google.com/file/d/1V-At97d8S8PyoD66rHIKIe-IcG5KpiN_/view?usp=drive_link)
 [![slides](https://img.shields.io/badge/Presentation-Slides-B762C1)](https://docs.google.com/presentation/d/1hnu4qGVKGEVDufHMNMTuTKUJRM62Ld-5/edit?usp=drive_link&ouid=105609476270770897731&rtpof=true&sd=true)
+
+Official page of "DeFT-AA: Array geometry agnostic multichannel speech enhancement", in Proc. Interspeech, 2024"
 
 #### News
 - **June 6, 2022:** Paper accepted at INTERSPEECH 2024 :tada: 
@@ -14,13 +13,12 @@ Official page of "DeFT-AA: Array geometry agnostic multichannel speech enhanceme
 
 ## Network Architecture
 
+
 <img src = ./figure/Model.png>
 
 ## Results and demo clips
 
 Experiments are performed for simulated datasets (spatialized DNS challenge) with various array shapes, number of microphones, and real-world datasets. You can download samples (circular array, rectangular array) if you want to hear demo clips.
-
-<img src = ./figure/Demo.png>
 
 <details>
 <summary><strong>Simulated dataset</strong> (click to expand) </summary>
@@ -34,7 +32,8 @@ Experiments are performed for simulated datasets (spatialized DNS challenge) wit
 <img src = ./figure/Real_exp.png>
 </details>
 
-<details>
+
+<img src = ./figure/Demo.png>
 
 ## Codes
 To train the model, you can use the codes below.\\

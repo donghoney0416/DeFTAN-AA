@@ -37,7 +37,7 @@ Requirements:
 ```
 pip install -r requirements.txt
 ```
-You can utilize any training tool (ex: ESPnet)
+The model code is available in $DeFTAN_AA.py$. You can use this code for training. The training can be done using any training tool (e.g., ESPNet), and other parameters are provided in the paper.
 
 ## Citation
 If you use DeFTAN-AA, please consider citing:

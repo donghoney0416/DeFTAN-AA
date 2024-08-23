@@ -6,7 +6,6 @@ Official page of "DeFT-AA: Array geometry agnostic multichannel speech enhanceme
 [![slides](https://img.shields.io/badge/Presentation-Slides-B762C1)](https://docs.google.com/presentation/d/1hnu4qGVKGEVDufHMNMTuTKUJRM62Ld-5/edit?usp=drive_link&ouid=105609476270770897731&rtpof=true&sd=true)
 
 #### News
-- **March 10, 2022:** Training codes are released :fire:
 - **June 6, 2022:** Paper accepted at INTERSPEECH 2024 :tada: 
 - **August 23, 2021:** Model codes and demos are released! :fire:
 
@@ -33,8 +32,14 @@ Experiments are performed for simulated datasets (spatialized DNS challenge) wit
 <imag src = ./figure/Real_exp.png>
 </details>
 
+<details>
+<summary><strong>Image Deraining</strong> (click to expand) </summary>
+
+<img src = ./figure/Model.png>
+</details>
+
 ## Codes
-To train the model, you can use the codes below.
+To train the model, you can use the codes below.\\
 Requirements:
 ```
 pip install -r requirements.txt

@@ -20,23 +20,21 @@ Official page of "DeFT-AA: Array geometry agnostic multichannel speech enhanceme
 
 Experiments are performed for simulated datasets (spatialized DNS challenge) with various array shapes, number of microphones, and real-world datasets. You can download samples (circular array, rectangular array) if you want to hear demo clips.
 
+<img src = ./figure/Demo.png>
+
 <details>
 <summary><strong>Simulated dataset</strong> (click to expand) </summary>
     
-<imag src = ./figure/sim_results.PNG>
+<iㅡg src = ./figure/sim_results.PNG>
 </details>
 
 <details>
 <summary><strong>Real-world experiments</strong> (click to expand) </summary>
     
-<imag src = ./figure/Real_exp.png>
+<img src = ./figure/Real_exp.png>
 </details>
 
 <details>
-<summary><strong>Image Deraining</strong> (click to expand) </summary>
-
-<img src = ./figure/Model.png>
-</details>
 
 ## Codes
 To train the model, you can use the codes below.\\

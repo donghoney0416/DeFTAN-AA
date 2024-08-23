@@ -23,11 +23,13 @@ Experiments are performed for simulated datasets (spatialized DNS challenge) wit
 
 <details>
 <summary><strong>Simulated dataset</strong> (click to expand) </summary>
+    
 <imag src = ./figure/sim_results.PNG>
 </details>
 
 <details>
 <summary><strong>Real-world experiments</strong> (click to expand) </summary>
+    
 <imag src = ./figure/Real_exp.png>
 </details>
 
@@ -37,7 +39,7 @@ Requirements:
 ```
 pip install -r requirements.txt
 ```
-The model code is available in $DeFTAN_AA.py$. You can use this code for training. The training can be done using any training tool (e.g., ESPNet), and other parameters are provided in the paper.
+The model code is available in $DeFTAN-AA.py$. You can use this code for training. The training can be done using any training tool (e.g., ESPNet), and other parameters are provided in the paper.
 
 ## Citation
 If you use DeFTAN-AA, please consider citing:

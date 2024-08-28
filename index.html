@@ -73,13 +73,22 @@
         <tr>
             <td>
                 <div class="paper_figure">
-                    <img src="src/fig/overview.png" alt="overview"><br>
+                    <img src="src/fig/Diagram.png" alt="overview"><br>
                 </div>
 
                 <hr>
                 <b>Abstract:</b> We propose an array geometry agnostic multichannel speech enhancement model, which is trained on a single microphone array but can enhance speech in various arrays with different shapes and numbers of microphones. To enable array agnostic processing, the model employs a gated split dense block (GSDB) that separates foreground speech and background noise regardless of array geometry. Furthermore, to design an array-agnostic encoder compatible with different numbers of microphones, we introduce the spatial transformer (ST) that aggregates spatial information by channel-wise self-attention. The proposed space-object cross-attention (SOCA) block alleviates overfitting to a specific array configuration through cross-attention between spatial features and object features. Experimental results demonstrate the efficacy of the proposed model across various array geometries in both simulated and real-world datasets.                     <br>
 
                 <hr>
+                <details>
+                <br>
+                <summary><strong>Overall architecture</strong> (click to expand) </summary>
+                <div class="result_table">
+                    <img src = "src/fig/overview.png"> <br>
+                </div>
+                </details>
+                <br>
+                
                 <details>
                 <br>
                 <summary><strong>Experimental result of simulated dataset</strong> (click to expand) </summary>

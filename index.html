@@ -58,52 +58,51 @@
         </p>
     </center>
     <center>
-        <table style="max-width:960px;">
-            <tr>
-                <td>
-                    <div class="paper_figure">
-                        <img src="src/fig/overview.png" alt="overview"><br>
-                    </div>
+        <tr>
+            <td>
+                <div class="paper_figure">
+                    <img src="src/fig/overview.png" alt="overview"><br>
+                </div>
 
-                    <hr>
-                    <b>Abstract:</b> We propose an array geometry agnostic multichannel speech enhancement model, which is trained on a single microphone array but can enhance speech in various arrays with different shapes and numbers of microphones. To enable array agnostic processing, the model employs a gated split dense block (GSDB) that separates foreground speech and background noise regardless of array geometry. Furthermore, to design an array-agnostic encoder compatible with different numbers of microphones, we introduce the spatial transformer (ST) that aggregates spatial information by channel-wise self-attention. The proposed space-object cross-attention (SOCA) block alleviates overfitting to a specific array configuration through cross-attention between spatial features and object features. Experimental results demonstrate the efficacy of the proposed model across various array geometries in both simulated and real-world datasets.                     <br>
+                <hr>
+                <b>Abstract:</b> We propose an array geometry agnostic multichannel speech enhancement model, which is trained on a single microphone array but can enhance speech in various arrays with different shapes and numbers of microphones. To enable array agnostic processing, the model employs a gated split dense block (GSDB) that separates foreground speech and background noise regardless of array geometry. Furthermore, to design an array-agnostic encoder compatible with different numbers of microphones, we introduce the spatial transformer (ST) that aggregates spatial information by channel-wise self-attention. The proposed space-object cross-attention (SOCA) block alleviates overfitting to a specific array configuration through cross-attention between spatial features and object features. Experimental results demonstrate the efficacy of the proposed model across various array geometries in both simulated and real-world datasets.                     <br>
 
-                    <hr>
-                    <details>
-                    <br>
-                    <summary><strong>Experimental result of simulated dataset</strong> (click to expand) </summary>
-                    <div class="result_table">
-                        <img src = "src/fig/sim_results.PNG"> <br>
-                    </div>
-                    </details>
-                    <br>
-                    
-                    <details>
-                    <br>
-                    <summary><strong>Real-world experimental result</strong> (click to expand) </summary>
-                    <div class="real_experiment">
-                        <img src = "src/fig/Real_exp.png"> <br>
-                    </div>
-                    </details>
-                    <br>
-                    
-                    <div class="demo">
-                        <img src = "src/fig/Demo.png"> <br>
-                        <table style="width: 960px; max-width: 100%; border: 1px solid black;">
-                            <tr>
-                                <th style="border: 1px solid black; width: 320px;">Measured speech</th>
-                                <th style="border: 1px solid black; width: 320px;">Enhanced speech (Circular array)</th>
-                                <th style="border: 1px solid black; width: 320px;">Enhanced speech (Rectangular array)</th>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/real/real_noisy.wav" type="audio/wav"></audio></audio></td>
-                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/real/enhanced_circular.wav" type="audio/wav"></audio></audio></td>
-                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/real/enhanced_rectangular.wav" type="audio/wav"></audio></audio></td>
-                            </tr>
-                    </div>
-                </td>
-            </tr>
-        </table>
+                <hr>
+                <details>
+                <br>
+                <summary><strong>Experimental result of simulated dataset</strong> (click to expand) </summary>
+                <div class="result_table">
+                    <img src = "src/fig/sim_results.PNG"> <br>
+                </div>
+                </details>
+                <br>
+                
+                <details>
+                <br>
+                <summary><strong>Real-world experimental result</strong> (click to expand) </summary>
+                <div class="real_experiment">
+                    <img src = "src/fig/Real_exp.png"> <br>
+                </div>
+                </details>
+                <br>
+                
+                <div class="demo">
+                    <img src = "src/fig/Demo.png"> <br>
+                    <table style="width: 960px; max-width: 100%; border: 1px solid black;">
+                        <tr>
+                            <th style="border: 1px solid black; width: 320px;">Measured speech</th>
+                            <th style="border: 1px solid black; width: 320px;">Enhanced speech (Circular array)</th>
+                            <th style="border: 1px solid black; width: 320px;">Enhanced speech (Rectangular array)</th>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/real/real_noisy.wav" type="audio/wav"></audio></audio></td>
+                            <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/real/enhanced_circular.wav" type="audio/wav"></audio></audio></td>
+                            <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/real/enhanced_rectangular.wav" type="audio/wav"></audio></audio></td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
     </center>
 </body>
 

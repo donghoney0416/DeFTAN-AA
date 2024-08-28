@@ -23,7 +23,25 @@
             margin: auto;
         }
 
-        .rir_figure img {
+        .paper_figure img {
+            width: 960px;
+            display: block;
+            margin: auto;
+        }
+
+        .result_table img {
+            width: 960px;
+            display: block;
+            margin: auto;
+        }
+
+        .real_experiment img {
+            width: 960px;
+            display: block;
+            margin: auto;
+        }
+
+        .demo img {
             height: 120px;
             display: block;
             margin: auto;
@@ -60,21 +78,26 @@
                     <hr>
                     <details>
                     <summary><strong>Simulated dataset</strong> (click to expand) </summary>
-                    <img src = "src/fig/sim_results.PNG"> <br>
+                    <div class="result_table">
+                        <img src = "src/fig/sim_results.PNG"> <br>
+                    </div>
                     </details>
                     
                     <details>
                     <summary><strong>Real-world experiments</strong> (click to expand) </summary>
-                    <img src = "src/fig/Real_exp.png"> <br>
+                    <div class="real_experiment">
+                        <img src = "src/fig/Real_exp.png"> <br>
+                    </div>
                     </details>
-                    
-                    <img src = ./figure/Demo.png>
+                    <div class="demo">
+                        <img src = "src/fig/Demo.png"> <br>
+                    </div>
                     <h2>Audio samples</h2>
                     <center>
                         <table style="width: 960px; max-width: 100%; border: 1px solid black;">
                             <tr>
                                 <th style="border: 1px solid black; width: 60px;">#</th>
-                                <th style="border: 1px solid black; width: 120px;">Type</th>
+                                <th style="border: 1px solid black; width: 120px;">Noisy</th>
                                 <th style="border: 1px solid black; width: 120px;">RIR waveform<br>w/ DR-NED</th>
                                 <th style="border: 1px solid black; width: 240px;">RIR</th>
                                 <th style="border: 1px solid black; width: 240px;">Convolution<br>w/ percussion loop</th>

@@ -1,21 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Echo2Reverb Demo</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="container">
-        <h1>Echo2Reverb Demo</h1>
-        <p>This demo showcases the Echo2Reverb model in action. Upload a sample audio file and apply the reverb effect.</p>
-        <input type="file" id="audioFile" accept="audio/*">
-        <button id="uploadButton">Upload and Process</button>
-        <audio id="originalAudio" controls></audio>
-        <audio id="processedAudio" controls></audio>
-    </div>
+    <title>Echo-aware room impulse response generation</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 10px;
+        }
 
-    <script src="script.js"></script>
+        header {
+            text-align: center;
+            padding: 1px;
+            background-color: #f2f2f2;
+        }
+
+        .paper_figure img {
+            width: 480px;
+            display: block;
+            margin: auto;
+        }
+
+        .rir_figure img {
+            height: 120px;
+            display: block;
+            margin: auto;
+        }
+
+        .audio-control {
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <header>
+            <h1>Echo-aware room impulse response generation<br>[ <a href="https://doi.org/10.1121/10.0027931"
+                    target="_blank">Paper</a> | <a href="https://github.com/guanamusic/Echo2Reverb"
+                    target="_blank">Code</a> ]</h1>
+        </header>
+        <p>
+            <b>Seongrae Kim</b><sup>1</sup>, <b>Jae-hyoun Yoo</b><sup>2</sup>, and <b>Jung-Woo Choi</b><sup>1</sup><br>
+            <sup>1</sup>School of Electrical Engineering, Korea Advanced Institute of Science and Technology (KAIST),
+            Daejeon, Republic of Korea<br>
+            <sup>2</sup>Electronics and Telecommunications Research Institute (ETRI), Daejeon, Republic of Korea
+        </p>
+    </center>
+    <center>
+        <table style="max-width:960px;">
+            <tr>
+                <td>
+                    <div class="paper_figure">
+                        <img src="src/fig/overview.png" alt="overview"><br>
+                    </div>
+
+                    <hr>
+                    <b>Abstract:</b> In real-time applications, like interactive virtual reality environments, there is
+                    a significant need for low-complexity simulation of room impulse responses in highly complex virtual
+                    scenes, but this remains a challenging issue. In particular, simulating late reverberation using
+                    physically based acoustic modeling requires much computational effort, contrary to the early
+                    reflections that can be modeled by simpler techniques, e.g., the image source method. To tackle this
+                    computational complexity issue, we propose a neural network-based hybrid artificial reverberation
+                    framework (Echo2Reverb) that generates late reverberation from given early reflections. The proposed
+                    model can control both temporal texture and frequency-dependent energy decay, i.e., echo density and
+                    spectral energy distribution, of the generated reverberations by extracting spectral and
+                    echo-related features and filtering sampled sparse sequences and Gaussian noises using estimated
+                    features. To support the end-to-end training with controlled echo density, a differentiable
+                    approximation of the normalized echo density profile is proposed. We train and test the model not
+                    only for nearly diffuse but also distinct echoes prominent in late reverberations, such as with
+                    flutter echoes in narrow corridors. Evaluation results demonstrate that the proposed model can
+                    accurately reproduce frequency-dependent energy decay and temporal texture of a room impulse
+                    response using only early reflections.
+                    <br>
+
+                    <hr>
+                    <h2>Audio samples</h2>
+                    <center>
+                        <table style="width: 960px; max-width: 100%; border: 1px solid black;">
+                            <tr>
+                                <th style="border: 1px solid black; width: 60px;">#</th>
+                                <th style="border: 1px solid black; width: 120px;">Type</th>
+                                <th style="border: 1px solid black; width: 120px;">RIR waveform<br>w/ DR-NED</th>
+                                <th style="border: 1px solid black; width: 240px;">RIR</th>
+                                <th style="border: 1px solid black; width: 240px;">Convolution<br>w/ percussion loop</th>
+                                <th style="border: 1px solid black; width: 240px;">Convolution<br>w/ female vocal</th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; border: 1px solid black;" rowspan="3">1</td>
+                                <td style="text-align: center; border: 1px solid black;">Ground truth</td>
+                                <td style="text-align: center; border: 1px solid black;"><div class="rir_figure"><img src="src/fig/rir01_fig_0_GroundTruth.svg" alt="rir01_fig_0_GroundTruth"></div></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir01_RIR_0_GroundTruth.wav" type="audio/wav"></audio></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir01_jembe_0_GroundTruth.wav" type="audio/wav"></audio></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir01_vox_0_GroundTruth.wav" type="audio/wav"></audio></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; border: 1px solid black;">Echo2Reverb</td>
+                                <td style="text-align: center; border: 1px solid black;"><div class="rir_figure"><img src="src/fig/rir01_fig_1_Echo2Reverb.svg" alt="rir01_fig_1_Echo2Reverb"></div></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir01_RIR_1_Echo2Reverb.wav" type="audio/wav"></audio></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir01_jembe_1_Echo2Reverb.wav" type="audio/wav"></audio></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir01_vox_1_Echo2Reverb.wav" type="audio/wav"></audio></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; border: 1px solid black;">Early reflection only</td>
+                                <td style="text-align: center; border: 1px solid black;"><div class="rir_figure"><img src="src/fig/rir01_fig_2_EarlyOnly.svg" alt="rir01_fig_2_EarlyOnly"></div></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir01_RIR_2_EarlyOnly.wav" type="audio/wav"></audio></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir01_jembe_2_EarlyOnly.wav" type="audio/wav"></audio></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir01_vox_2_EarlyOnly.wav" type="audio/wav"></audio></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; border: 1px solid black;" rowspan="3">2</td>
+                                <td style="text-align: center; border: 1px solid black;">Ground truth</td>
+                                <td style="text-align: center; border: 1px solid black;"><div class="rir_figure"><img src="src/fig/rir02_fig_0_GroundTruth.svg" alt="rir02_fig_0_GroundTruth"></div></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir02_RIR_0_GroundTruth.wav" type="audio/wav"></audio></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir02_jembe_0_GroundTruth.wav" type="audio/wav"></audio></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir02_vox_0_GroundTruth.wav" type="audio/wav"></audio></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; border: 1px solid black;">Echo2Reverb</td>
+                                <td style="text-align: center; border: 1px solid black;"><div class="rir_figure"><img src="src/fig/rir02_fig_1_Echo2Reverb.svg" alt="rir02_fig_1_Echo2Reverb"></div></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir02_RIR_1_Echo2Reverb.wav" type="audio/wav"></audio></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir02_jembe_1_Echo2Reverb.wav" type="audio/wav"></audio></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir02_vox_1_Echo2Reverb.wav" type="audio/wav"></audio></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; border: 1px solid black;">Early reflection only</td>
+                                <td style="text-align: center; border: 1px solid black;"><div class="rir_figure"><img src="src/fig/rir02_fig_2_EarlyOnly.svg" alt="rir02_fig_2_EarlyOnly"></div></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir02_RIR_2_EarlyOnly.wav" type="audio/wav"></audio></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir02_jembe_2_EarlyOnly.wav" type="audio/wav"></audio></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir02_vox_2_EarlyOnly.wav" type="audio/wav"></audio></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; border: 1px solid black;" rowspan="3">3</td>
+                                <td style="text-align: center; border: 1px solid black;">Ground truth</td>
+                                <td style="text-align: center; border: 1px solid black;"><div class="rir_figure"><img src="src/fig/rir03_fig_0_GroundTruth.svg" alt="rir03_fig_0_GroundTruth"></div></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir03_RIR_0_GroundTruth.wav" type="audio/wav"></audio></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir03_jembe_0_GroundTruth.wav" type="audio/wav"></audio></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir03_vox_0_GroundTruth.wav" type="audio/wav"></audio></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; border: 1px solid black;">Echo2Reverb</td>
+                                <td style="text-align: center; border: 1px solid black;"><div class="rir_figure"><img src="src/fig/rir03_fig_1_Echo2Reverb.svg" alt="rir03_fig_1_Echo2Reverb"></div></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir03_RIR_1_Echo2Reverb.wav" type="audio/wav"></audio></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir03_jembe_1_Echo2Reverb.wav" type="audio/wav"></audio></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir03_vox_1_Echo2Reverb.wav" type="audio/wav"></audio></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; border: 1px solid black;">Early reflection only</td>
+                                <td style="text-align: center; border: 1px solid black;"><div class="rir_figure"><img src="src/fig/rir03_fig_2_EarlyOnly.svg" alt="rir03_fig_2_EarlyOnly"></div></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir03_RIR_2_EarlyOnly.wav" type="audio/wav"></audio></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir03_jembe_2_EarlyOnly.wav" type="audio/wav"></audio></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir03_vox_2_EarlyOnly.wav" type="audio/wav"></audio></td>
+                            </tr>
+
+                            <tr>
+                                <td style="text-align: center; border: 1px solid black;" rowspan="3">4</td>
+                                <td style="text-align: center; border: 1px solid black;">Ground truth</td>
+                                <td style="text-align: center; border: 1px solid black;"><div class="rir_figure"><img src="src/fig/rir04_fig_0_GroundTruth.svg" alt="rir04_fig_0_GroundTruth"></div></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir04_RIR_0_GroundTruth.wav" type="audio/wav"></audio></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir04_jembe_0_GroundTruth.wav" type="audio/wav"></audio></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir04_vox_0_GroundTruth.wav" type="audio/wav"></audio></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; border: 1px solid black;">Echo2Reverb</td>
+                                <td style="text-align: center; border: 1px solid black;"><div class="rir_figure"><img src="src/fig/rir04_fig_1_Echo2Reverb.svg" alt="rir04_fig_1_Echo2Reverb"></div></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir04_RIR_1_Echo2Reverb.wav" type="audio/wav"></audio></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir04_jembe_1_Echo2Reverb.wav" type="audio/wav"></audio></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir04_vox_1_Echo2Reverb.wav" type="audio/wav"></audio></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; border: 1px solid black;">Early reflection only</td>
+                                <td style="text-align: center; border: 1px solid black;"><div class="rir_figure"><img src="src/fig/rir04_fig_2_EarlyOnly.svg" alt="rir04_fig_2_EarlyOnly"></div></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir04_RIR_2_EarlyOnly.wav" type="audio/wav"></audio></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir04_jembe_2_EarlyOnly.wav" type="audio/wav"></audio></td>
+                                <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/rir04_vox_2_EarlyOnly.wav" type="audio/wav"></audio></td>
+                            </tr>
+                    </center>
+                </td>
+            </tr>
+        </table>
+    </center>
 </body>
+
 </html>

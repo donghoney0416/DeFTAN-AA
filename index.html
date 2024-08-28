@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Echo-aware room impulse response generation</title>
+    <title>Array geometry agnostic multichannel speech enhancement</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -38,15 +38,12 @@
 <body>
     <center>
         <header>
-            <h1>Echo-aware room impulse response generation<br>[ <a href="https://doi.org/10.1121/10.0027931"
-                    target="_blank">Paper</a> | <a href="https://github.com/guanamusic/Echo2Reverb"
-                    target="_blank">Code</a> ]</h1>
+            <h1>DeFTAN-AA: Array geometry agnostic multichannel speech enhancement</h1>
         </header>
         <p>
-            <b>Seongrae Kim</b><sup>1</sup>, <b>Jae-hyoun Yoo</b><sup>2</sup>, and <b>Jung-Woo Choi</b><sup>1</sup><br>
+            <b>Dongheon Lee</b><sup>1</sup>, and <b>Jung-Woo Choi</b><sup>1</sup><br>
             <sup>1</sup>School of Electrical Engineering, Korea Advanced Institute of Science and Technology (KAIST),
-            Daejeon, Republic of Korea<br>
-            <sup>2</sup>Electronics and Telecommunications Research Institute (ETRI), Daejeon, Republic of Korea
+            Daejeon, Republic of Korea
         </p>
     </center>
     <center>
@@ -58,23 +55,7 @@
                     </div>
 
                     <hr>
-                    <b>Abstract:</b> In real-time applications, like interactive virtual reality environments, there is
-                    a significant need for low-complexity simulation of room impulse responses in highly complex virtual
-                    scenes, but this remains a challenging issue. In particular, simulating late reverberation using
-                    physically based acoustic modeling requires much computational effort, contrary to the early
-                    reflections that can be modeled by simpler techniques, e.g., the image source method. To tackle this
-                    computational complexity issue, we propose a neural network-based hybrid artificial reverberation
-                    framework (Echo2Reverb) that generates late reverberation from given early reflections. The proposed
-                    model can control both temporal texture and frequency-dependent energy decay, i.e., echo density and
-                    spectral energy distribution, of the generated reverberations by extracting spectral and
-                    echo-related features and filtering sampled sparse sequences and Gaussian noises using estimated
-                    features. To support the end-to-end training with controlled echo density, a differentiable
-                    approximation of the normalized echo density profile is proposed. We train and test the model not
-                    only for nearly diffuse but also distinct echoes prominent in late reverberations, such as with
-                    flutter echoes in narrow corridors. Evaluation results demonstrate that the proposed model can
-                    accurately reproduce frequency-dependent energy decay and temporal texture of a room impulse
-                    response using only early reflections.
-                    <br>
+                    <b>Abstract:</b> We propose an array geometry agnostic multichannel speech enhancement model, which is trained on a single microphone array but can enhance speech in various arrays with different shapes and numbers of microphones. To enable array agnostic processing, the model employs a gated split dense block (GSDB) that separates foreground speech and background noise regardless of array geometry. Furthermore, to design an array-agnostic encoder compatible with different numbers of microphones, we introduce the spatial transformer (ST) that aggregates spatial information by channel-wise self-attention. The proposed space-object cross-attention (SOCA) block alleviates overfitting to a specific array configuration through cross-attention between spatial features and object features. Experimental results demonstrate the efficacy of the proposed model across various array geometries in both simulated and real-world datasets.                     <br>
 
                     <hr>
                     <h2>Audio samples</h2>

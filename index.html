@@ -36,7 +36,7 @@
             margin: auto;
         }
         .simulated img {
-            width: 960px;
+            width: 720px;
             display: block;
             margin: auto;
         }
@@ -118,14 +118,17 @@
                     <img src = "src/fig/Dataset.png"> <br>
                     <table style="width: 960px; max-width: 100%; border: 1px solid black;">
                         <tr>
-                            <th style="border: 1px solid black; width: 320px;">Measured speech</th>
-                            <th style="border: 1px solid black; width: 320px;">Enhanced speech (Circular array)</th>
-                            <th style="border: 1px solid black; width: 320px;">Enhanced speech (Rectangular array)</th>
+                            <th style="border: 1px solid black; width: 120px;" rowspan="2">Noisy</th>
+                            <th style="border: 1px solid black; width: 720px;">Enhanced</th>
+                            <th style="border: 1px solid black; width: 120px;" rowspan="2">Clean</th>
                         </tr>
                         <tr>
-                            <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/real/real_noisy.wav" type="audio/wav"></audio></audio></td>
-                            <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/real/enhanced_circular.wav" type="audio/wav"></audio></audio></td>
-                            <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/real/enhanced_rectangular.wav" type="audio/wav"></audio></audio></td>
+                            <th style="border: 1px solid black; width: 120px;">Rererence</th>
+                            <th style="border: 1px solid black; width: 120px;">Circular</th>
+                            <th style="border: 1px solid black; width: 120px;">Rectangular</th>
+                            <th style="border: 1px solid black; width: 120px;">Linear</th>
+                            <th style="border: 1px solid black; width: 120px;">Tetrahedron</th>
+                            <th style="border: 1px solid black; width: 120px;">Random</th>
                         </tr>
                     </table>
                 </div>

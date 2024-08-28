@@ -38,7 +38,7 @@
 <body>
     <center>
         <header>
-            <h1>DeFTAN-AA: Array geometry agnostic multichannel speech enhancement</h1>
+            <h1>DeFTAN-AA: Array geometry agnostic <be> multichannel speech enhancement</h1>
         </header>
         <p>
             <b>Dongheon Lee</b><sup>1</sup>, and <b>Jung-Woo Choi</b><sup>1</sup><br>
@@ -58,6 +58,17 @@
                     <b>Abstract:</b> We propose an array geometry agnostic multichannel speech enhancement model, which is trained on a single microphone array but can enhance speech in various arrays with different shapes and numbers of microphones. To enable array agnostic processing, the model employs a gated split dense block (GSDB) that separates foreground speech and background noise regardless of array geometry. Furthermore, to design an array-agnostic encoder compatible with different numbers of microphones, we introduce the spatial transformer (ST) that aggregates spatial information by channel-wise self-attention. The proposed space-object cross-attention (SOCA) block alleviates overfitting to a specific array configuration through cross-attention between spatial features and object features. Experimental results demonstrate the efficacy of the proposed model across various array geometries in both simulated and real-world datasets.                     <br>
 
                     <hr>
+                    <details>
+                    <summary><strong>Simulated dataset</strong> (click to expand) </summary>
+                    <img src = "src/fig/sim_results.PNG"> <br>
+                    </details>
+                    
+                    <details>
+                    <summary><strong>Real-world experiments</strong> (click to expand) </summary>
+                    <img src = "src/fig/Real_exp.png"> <br>
+                    </details>
+                    
+                    <img src = ./figure/Demo.png>
                     <h2>Audio samples</h2>
                     <center>
                         <table style="width: 960px; max-width: 100%; border: 1px solid black;">

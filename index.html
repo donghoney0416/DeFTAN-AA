@@ -35,6 +35,11 @@
             display: block;
             margin: auto;
         }
+        .simulated img {
+            width: 960px;
+            display: block;
+            margin: auto;
+        }
         .spectrogram img {
             height: 120px;
             display: block;
@@ -87,11 +92,11 @@
             </td>
         </tr>
     </left>
-    <center>
+    <left>
         <tr>
             <td>
                 <br>
-                <h2><left>Real-world demo</left></h2>
+                <h2>Real-world demo</h2>
                 <div class="demo">
                     <img src = "src/fig/Demo.png"> <br>
                     <table style="width: 960px; max-width: 100%; border: 1px solid black;">
@@ -108,23 +113,25 @@
                     </table>
                 </div>
                 <br>
-                <h2><left>Audio samples</left></h2>
-                <img src = "src/fig/Dataset.png"> <br>
-                <table style="width: 960px; max-width: 100%; border: 1px solid black;">
-                    <tr>
-                        <th style="border: 1px solid black; width: 320px;">Measured speech</th>
-                        <th style="border: 1px solid black; width: 320px;">Enhanced speech (Circular array)</th>
-                        <th style="border: 1px solid black; width: 320px;">Enhanced speech (Rectangular array)</th>
-                    </tr>
-                    <tr>
-                        <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/real/real_noisy.wav" type="audio/wav"></audio></audio></td>
-                        <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/real/enhanced_circular.wav" type="audio/wav"></audio></audio></td>
-                        <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/real/enhanced_rectangular.wav" type="audio/wav"></audio></audio></td>
-                    </tr>
-                </table>
+                <h2>Audio samples</h2>
+                <div class="simulated">
+                    <img src = "src/fig/Dataset.png"> <br>
+                    <table style="width: 960px; max-width: 100%; border: 1px solid black;">
+                        <tr>
+                            <th style="border: 1px solid black; width: 320px;">Measured speech</th>
+                            <th style="border: 1px solid black; width: 320px;">Enhanced speech (Circular array)</th>
+                            <th style="border: 1px solid black; width: 320px;">Enhanced speech (Rectangular array)</th>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/real/real_noisy.wav" type="audio/wav"></audio></audio></td>
+                            <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/real/enhanced_circular.wav" type="audio/wav"></audio></audio></td>
+                            <td style="text-align: center; border: 1px solid black;"><audio controls style="width: 100%;"><source src="src/audio/real/enhanced_rectangular.wav" type="audio/wav"></audio></audio></td>
+                        </tr>
+                    </table>
+                </div>
             </td>
         </tr>
-    </center>
+    </left>
 </body>
 
 </html>
